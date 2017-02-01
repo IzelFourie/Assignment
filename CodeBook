@@ -1,20 +1,49 @@
 # Code Book
-This document describes the code inside run_analysis.R.
-The code is splitted (by comments) in some sections:
-Helper functions
-Constants
-Downloading and loading data
-Manipulating data
-Writing final data to CSV
-Helper functions
-Some functions to avoid code repetition and make the rest of code more clean.
-fileJoin
-Used to build file paths, it concatenates strings using a slash as separator.
-downloadToDataDir
-Downloads the given url to the given destiny file. It also creates data dir if it doesn't exist.
-extractUciHarFile
-Extract a file from the zipped UCI HAR file.
-uciHarDataFile
+This document describes the code inside assignment submission.R.
+
+The code is splitted by headings in sections:
+* Downloading data
+* Reading data
+* Editing data
+* Analyzing data
+
+## Downloading data
+Downloads the given url ("https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
+) to the given destination file: "mydataset.zip".
+Unzip the mydataset zip file.
+list.files() shows the file that was unzipped and downloaded to the working directory:
+UCI HAR Dataset
+calling list.files(UCI HAR Dataset) lists the files in the UCI HAR Dataset.
+The README file in the UCI HAR Dataset states the files of interest for this exercise.
+
+## Reading data
+### Train and test data
+Give the working directory from where to extract the data files.
+Read the dataset files from UCI HAR by read.table of which the output are data.frames.
+The data.frames are saved to objects:
+train_set <- read.table("./train/X_train.txt")           # the training dataset
+train_subject <- read.table("./train/subject_train.txt") # participants/subjects for each observation
+train_labl <- read.table("./train/y_train.txt")          # labels for the different types of activities
+
+The test dataset is read in as above:
+reads test data.frame to test_set,
+the subject data.frame to test_subject and
+the activity labels data.frame to test_labl.
+
+The train_set and test_set data.frames contain the different variables as columns. The variables are referred to as features.
+A list and information on the different features is given in the UCI HAR Data file: features_info.txt 
+The train_subject and test_subject data.frames show the subject for each observation in the train_set and test_set respectively.
+train_labl and test_labl data.frames give the type of activity for each observation as labels/IDs (later called activityID in the clean data.frame).
+Thus the activityID that corresponds to each observation in train_set and test_set.
+
+### Features and activities
+act_labl <- read.table("activity_labels.txt")
+features <- read.table("features.txt")
+
+
+
+
+
 Read dataset files from UCI HAR to given name and prefix. Know names are "train" and "test". Known prefixes are "X", "y" and "subject".
 Examples:
 UCI HAR Dataset/train/X_train.txt
