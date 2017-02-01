@@ -73,8 +73,7 @@ Select features (i.e. the variable names of "dataset") that contain mean and std
 I excluded features that were not measured on an X, Y or Z axis. These features were excluded by running the
 grep() function on "mean()-" and "std()-". Features not ending with X, Y, and Z do not contain a "-" after "mean()".
 Features containing mean and std are stored in variables mean and std.
-The subset of columns containing mean are stored in "columns_mean" and the columns containing std are stored in "columns_std".
-Columns 1 (subject) and 2 (activityID) is subsetted and stored in "columns_subject_activityID".
+The subset of columns containing mean are stored in "columns_mean" and the columns containing std are stored in "columns_std".Columns 1 (subject) and 2 (activityID) is subsetted and stored in "columns_subject_activityID".
 
 "columns_mean", "columns_std" and "columns_subject_activityID" are bound together to form the new dataset: "dataset1"
 
@@ -140,4 +139,4 @@ Groups: subject, activity, feature, statistic [?]
 Features were determined at different time points. Thus for row 1: in the "mean" column I see the average value
 for the mean statistic of the feature fBodyAcc over different time point measurements on the X axis for subject 1 while laying.
 
-Save the final data as an rdata file.
+Save the final data as a csv data file and rdata file.
