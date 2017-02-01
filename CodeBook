@@ -86,47 +86,58 @@ Exclude the subject and activityID columns. Give the new stacked column the name
 2. Call separate() on "res" to split the variable column into feature, statistic and axis columns.
 The different classes/variables of this column are separated by "-". Define the separator as "-" in the call.
 This creates three columns and they are given the names "feature", "statistic" and "axis".
+The resulting data.frame has 5 columns and is stored in "df".
 
 Remove "()" from the contents of the "statistic" column with gsub.
 
-## Add a column with activities (WALKING etc) that correspond to the activity ID.
-
-
-```{r} 
-activity <- tolower(act_labl$activity)
-activity
+### Add a column with activities (WALKING etc) that correspond to the activity ID.
+The "activity" variable from the data.frame "act_labl" is stored in "activity".
+The activity labeled with integers is converted into character variables using the line:
 activity[df$activityID]
-df$activity <- activity[df$activityID]
 
-#Check to see if activity values correspond to activityID
-table(df$activity)
-table(df$activityID)
-# Change order of columns
-df <- df[,c(1,2,7,3,4,5,6)]
-head(df)
-```
+A column with the name activity is added to "df".
+Check to see if activity values correspond to activityID
+Change the order of columns in "df", moving the "activity" column to be the third column of "df".
 
-# Analysis
-## Use dplyr to calculate averages
-```{r}
-tbldf <-tbl_df(df) # Convert df to a tibble data frame.
-```
-
-## Determine average of each subject for each activity, feature, statistic and axis
-```{r}
-group_subject <- group_by(tbldf, subject, activity, feature, statistic, axis)
-new_data <- summarise(group_subject, mean=mean(value))
-
-save(new_data, file = "new_data.rdata")
-save(new_data, file = "new_data.csv")
+At this point my clean data.frame (df) looks like this:
+> head(df)
+  subject activityID activity  feature statistic axis     value
+1       1          5 standing tBodyAcc      mean    X 0.2885845
+2       1          5 standing tBodyAcc      mean    X 0.2784188
+3       1          5 standing tBodyAcc      mean    X 0.2796531
+4       1          5 standing tBodyAcc      mean    X 0.2791739
+5       1          5 standing tBodyAcc      mean    X 0.2766288
+6       1          5 standing tBodyAcc      mean    X 0.2771988
 
 
+## Analysis
+### Use dplyr to calculate averages
+Convert df to a tibble data frame and store it in tbldf.
 
-At this point the final data frame meanAndStdAverages looks like this:
-> head(meanAndStdAverages[, 1:5], n=3)
-  Activity Subject tBodyAcc.mean...X tBodyAcc.mean...Y tBodyAcc.mean...Z
-1  WALKING       1         0.2773308       -0.01738382        -0.1111481
-2  WALKING       2         0.2764266       -0.01859492        -0.1055004
-3  WALKING       3         0.2755675       -0.01717678        -0.1126749
-Writing final data to CSV
-Creates the output dir if it doesn't exist and writes meanAndStdAverages data frame to  the ouputfile.
+### Determine average of each subject for each activity, feature, statistic and axis
+Group the data.frame (tbldf) by subject, then activity, then feature, then statistic and then axis. Store in "group_subject".
+The mean of the value column is calculated by the summarise function. Specifying that the mean of the "value" column needs to be calculated.
+The result is stored in "new_data" and it looks like this:
+
+> new_data
+Source: local data frame [8,640 x 6]
+Groups: subject, activity, feature, statistic [?]
+
+   subject activity      feature statistic  axis       mean
+     <int>    <chr>        <chr>     <chr> <chr>      <dbl>
+1        1   laying     fBodyAcc      mean     X -0.9390991
+2        1   laying     fBodyAcc      mean     Y -0.8670652
+3        1   laying     fBodyAcc      mean     Z -0.8826669
+4        1   laying     fBodyAcc       std     X -0.9244374
+5        1   laying     fBodyAcc       std     Y -0.8336256
+6        1   laying     fBodyAcc       std     Z -0.8128916
+7        1   laying fBodyAccJerk      mean     X -0.9570739
+8        1   laying fBodyAccJerk      mean     Y -0.9224626
+9        1   laying fBodyAccJerk      mean     Z -0.9480609
+10       1   laying fBodyAccJerk       std     X -0.9641607
+# ... with 8,630 more rows
+
+Features were determined at different time points. Thus for row 1: in the "mean" column I see the average value
+for the mean statistic of the feature fBodyAcc over different time point measurements on the X axis for subject 1 while laying.
+
+Save the final data as an rdata file.
