@@ -139,4 +139,4 @@ Groups: subject, activity, feature, statistic [?]
 Features were determined at different time points. Thus for row 1: in the "mean" column I see the average value
 for the mean statistic of the feature fBodyAcc over different time point measurements on the X axis for subject 1 while laying.
 
-Save the final data as a csv data file and rdata file.
+Save the final data as a txt data file: new_data.txt.
