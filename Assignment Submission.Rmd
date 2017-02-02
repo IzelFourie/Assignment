@@ -142,7 +142,6 @@ group_subject <- group_by(tbldf, subject, activity, feature, statistic, axis)
 new_data <- summarise(group_subject, mean=mean(value))
 
 setwd("C:/Users/Izel/Dropbox/Courses/Coursera/Getting and Cleaning data/Week 4/Assignment")
-save(new_data, file = "new_data.rdata")
-write.csv(new_data, file ="new_data.csv")
+write.table(new_data, file = "new_data.txt", row.names=FALSE)
 ```
 
