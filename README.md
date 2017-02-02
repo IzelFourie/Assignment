@@ -2,12 +2,16 @@
 This is my Week 4 assignment for the Coursera course Getting and Cleaning Data.
 
 ### How my script works
-I submitted an R script file: Assignment submission.Rmd Assignment Submission.Rmd
-The script consists of the following components
-1. **Download** data.
-2. **Read** train data, test data and other relevant data.
-3. **Edit** data.
-4. **Analyze** data.
+I submitted an R script file: Assignment submission.Rmd
+The script consists of the following components 
+1. **Download** data.  
++ download the zipped file to the chosen working directory and unzip the file.
+2. **Read** train data, test data and other relevant data. 
++ read the training and test datasets, and the training label for each observation in the training and test datasets. 
++ read the features which are the variable names for the training and test data
++ read the activities that correspond to the test_labl and train_labl. The test_labl and train_labl data is used as activityID and the act_labl is used as activity in the final data frame.  
+3. **Edit** data.  
+4. **Analyze** data.  
 
 A description of how the data is edited and anlysed is described in my CodeBook document.
 
