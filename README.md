@@ -2,7 +2,7 @@
 This is my Week 4 assignment for the Coursera course Getting and Cleaning Data.
 
 ### How my script works
-I submitted an R script file: `Assignment submission.Rmd` 
+I submitted an R script file: `run_analysis.R` 
 The script consists of the following components  
 
 1. **Download** data.  
